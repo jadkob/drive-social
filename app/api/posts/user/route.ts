@@ -14,7 +14,7 @@ export async function GET(req: Request) {
       author: { $eq: decoded.username },
     });
     if (posts.length == 0)
-      return new Response("No posts found", { status: 404 });
+      return new Response("No Events Yet", { status: 404 });
 
     return Response.json(posts);
   } catch (error: any) {

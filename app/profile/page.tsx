@@ -7,6 +7,7 @@ import * as jwt from "jsonwebtoken";
 import { Post } from "../types";
 import Loading from "../customComponents/Loading";
 import Nav from "../Nav";
+import Error from "../customComponents/Error";
 
 export default function Home() {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -29,7 +30,7 @@ export default function Home() {
         });
         setPosts(res.data);
       } catch (err: any) {
-        setError(err.message);
+        setError(err.response.data);
       } finally {
         setLoading(false);
       }
@@ -45,7 +46,7 @@ export default function Home() {
         {loading ? (
           <Loading />
         ) : error ? (
-          <p>{error}</p>
+          <Error error={error} />
         ) : (
           posts.map((post) => (
             <div
