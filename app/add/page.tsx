@@ -7,6 +7,7 @@ import { useRef, useState } from "react";
 import Error from "../customComponents/Error";
 import Loading from "../customComponents/Loading";
 import Back from "../customComponents/backButton";
+import Nav from "../Nav";
 
 export default function LogIn() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -20,6 +21,7 @@ export default function LogIn() {
     <Loading />
   ) : (
     <>
+      <Nav />
       <form
         className="flex flex-col gap-[3vh] items-center justify-center h-screen"
         onSubmit={(e) => {

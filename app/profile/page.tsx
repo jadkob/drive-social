@@ -22,7 +22,7 @@ export default function Home() {
     const fetchPosts = async () => {
       setLoading(true);
       try {
-        const res = await axios.get("/api/posts", {
+        const res = await axios.get("/api/posts/user", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -37,32 +37,6 @@ export default function Home() {
 
     fetchPosts();
   }, []);
-
-  const handleRSVP = async (postId: string) => {
-    try {
-      const res = await axios.post(
-        "/api/posts/rsvp",
-        { postId },
-        {
-          headers: {
-            Authorization: `Bearer ${getCookie("token")}`,
-          },
-        }
-      );
-      alert("RSVPed succesfully");
-      // Update the post in the state with the new data returned from the server
-      setPosts((prevPosts) =>
-        prevPosts.map((post) =>
-          post._id === postId
-            ? { ...post, rsvps: [...post.rsvps, username] }
-            : post
-        )
-      );
-    } catch (err: any) {
-      console.error(err.message);
-      alert(err.response?.data || "An error occurred");
-    }
-  };
 
   return (
     <>
@@ -86,13 +60,6 @@ export default function Home() {
               <h2 className="text-[1.2rem]">
                 This Event is hosted by: {post.author}
               </h2>
-              {!post.rsvps.includes(username) ? (
-                <Button onClick={() => handleRSVP(post._id as string)}>
-                  RSVP for this event
-                </Button>
-              ) : (
-                <h1 className="mt-[3vh]">RSVPed To {post.name}</h1>
-              )}
             </div>
           ))
         )}
