@@ -23,6 +23,9 @@ export default function LogIn() {
   ) : (
     <>
       <Nav />
+      <h1 className="text-center text-[3rem] mt-[20vh] mb-[-10vh] font-bold">
+        Add
+      </h1>
       <form
         className="flex flex-col gap-[3vh] items-center justify-center h-screen"
         onSubmit={(e) => {
@@ -45,34 +48,44 @@ export default function LogIn() {
               }
             )
             .then((res) => {
-              alert("Post created successfully");
               router.push("/home");
             })
             .catch((err) => {
               setError(err.response.data);
             })
-            .finally(() => setLoading(false));
+            .finally(() => {
+              setLoading(false);
+            });
         }}
       >
         {error && <Error error={error} />}
-        <Input
+        <input
           type="text"
-          placeholder="Event Name"
+          placeholder="Name"
+          className="input input-bordered w-full max-w-xs"
           ref={name}
-          className="w-fit px-[4vw]"
         />
-        <Input ref={country} placeholder="Country" className="w-fit px-[4vw]" />
-        <Input
+        <input
+          type="text"
+          placeholder="Country"
+          ref={country}
+          className="input input-bordered w-full max-w-xs"
+        />
+        <input
+          type="text"
+          placeholder="Type here"
+          className="input input-bordered w-full max-w-xs"
           ref={location}
-          placeholder="Location"
-          className="w-fit px-[4vw]"
         />
-        <Input
-          placeholder="Date"
-          className="w-fit px-[4vw]"
+        <input
+          type="text"
+          placeholder="Type here"
+          className="input input-bordered w-full max-w-xs"
           onChange={(e) => setDate(e.target.value)}
         />
-        <Button onClick={() => alert(date)}>Add</Button>
+        <button className="btn btn-neutral btn-wide text-[1.5rem] text-white">
+          Add
+        </button>
       </form>
     </>
   );

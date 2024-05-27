@@ -8,6 +8,8 @@ import { useRef, useState } from "react";
 import Error from "../customComponents/Error";
 import Loading from "../customComponents/Loading";
 import Back from "../customComponents/backButton";
+import { UsernameInput } from "../UsernameInput";
+import { PasswordInput } from "../PasswordInput";
 
 export default function LogIn() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -45,19 +47,11 @@ export default function LogIn() {
         }}
       >
         {error && <Error error={error} />}
-        <Input
-          type="text"
-          placeholder="Username"
-          ref={username}
-          className="w-fit px-[4vw]"
-        />
-        <Input
-          type="password"
-          ref={password}
-          placeholder="Password"
-          className="w-fit px-[4vw]"
-        />
-        <Button>LogIn</Button>
+        <UsernameInput ref={username} />
+        <PasswordInput ref={password} />
+        <button className="btn btn-neutral btn-wide text-[1.4rem]">
+          LogIn
+        </button>
       </form>
     </>
   );

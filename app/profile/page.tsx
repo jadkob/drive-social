@@ -39,35 +39,12 @@ export default function Home() {
     fetchPosts();
   }, []);
 
-  const handleRSVP = async (postId: string) => {
-    try {
-      const res = await axios.post(
-        "/api/posts/rsvp",
-        { postId },
-        {
-          headers: {
-            Authorization: `Bearer ${getCookie("token")}`,
-          },
-        }
-      );
-      alert("RSVPed succesfully");
-      // Update the post in the state with the new data returned from the server
-      setPosts((prevPosts) =>
-        prevPosts.map((post) =>
-          post._id === postId
-            ? { ...post, rsvps: [...post.rsvps, username] }
-            : post
-        )
-      );
-    } catch (err: any) {
-      console.error(err.message);
-      alert(err.response?.data || "An error occurred");
-    }
-  };
-
   return (
     <>
       <Nav />
+      <h1 className="text-center text-[3rem] mt-[20vh] mb-[-10vh] font-bold">
+        Profile
+      </h1>
       <div className="mt-[20vh] flex flex-col gap-[5vh] items-center">
         {loading ? (
           <Loading />

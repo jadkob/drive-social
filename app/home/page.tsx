@@ -68,6 +68,9 @@ export default function Home() {
   return (
     <>
       <Nav />
+      <h1 className="text-center text-[3rem] mt-[20vh] mb-[-10vh] font-bold">
+        Home
+      </h1>
       <div className="mt-[20vh] flex flex-col gap-[5vh] items-center">
         {loading ? (
           <Loading />
@@ -79,7 +82,9 @@ export default function Home() {
               key={post._id as string}
               className="flex flex-col gap-[1vh] border-solid border p-[6vw]"
             >
-              <h1 className="text-[1.6rem] text-center">{post.name}</h1>
+              <h1 className="text-[1.6rem] text-center capitalize">
+                {post.name}
+              </h1>
               <div className="mt-[1vw] flex flex-col gap-[2vh]">
                 <h2 className="text-[1.4rem]">
                   This meetup is in {post.country} at {post.location}
@@ -89,11 +94,16 @@ export default function Home() {
                   This Event is hosted by: {post.author}
                 </h2>
                 {!post.rsvps.includes(username) ? (
-                  <Button onClick={() => handleRSVP(post._id as string)}>
+                  <button
+                    className="btn btn-neutral btn-wide "
+                    onClick={() => handleRSVP(post._id as string)}
+                  >
                     RSVP for this event
-                  </Button>
+                  </button>
                 ) : (
-                  <h1 className="mt-[3vh]">RSVPed To {post.name}</h1>
+                  <h1 className="mt-[3vh] text-center font-bold text-[1.5rem]">
+                    RSVPed To {post.name}
+                  </h1>
                 )}
               </div>
             </div>

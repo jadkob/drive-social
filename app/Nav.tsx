@@ -4,11 +4,18 @@ import { useRouter } from "next/navigation";
 export default function Nav() {
   const router = useRouter();
   return (
-    <nav className="flex items-center gap-[5vw] justify-center bg-black top-0 left-0 text-white h-[10vh]">
-      <Link href={"/home"}>Home</Link>
-      <Link href="/add">Add</Link>
-      <Link href={"/profile"}>Profile</Link>
+    <nav className="navbar bg-base-100 fixed flex items-center justify-center w-full gap-[1vw] sm:gap-[5vw] top-0">
+      <Link href={"/home"} className="btn btn-ghost text-xl">
+        Home
+      </Link>
+      <Link href="/add" className="btn btn-ghost text-xl">
+        Add
+      </Link>
+      <Link href={"/profile"} className="btn btn-ghost text-xl">
+        Profile
+      </Link>
       <button
+        className="btn btn-ghost text-xl"
         onClick={() => {
           deleteCookie("token");
           router.push("/");

@@ -7,8 +7,9 @@ import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import Error from "../customComponents/Error";
 import Loading from "../customComponents/Loading";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Back from "../customComponents/backButton";
+import { UsernameInput } from "../UsernameInput";
+import { PasswordInput } from "../PasswordInput";
 
 export default function SignUp() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -46,19 +47,14 @@ export default function SignUp() {
         }}
       >
         {error && <Error error={error} />}
-        <Input
-          type="text"
-          placeholder="Username"
-          ref={username}
-          className="w-fit px-[4vw]"
-        />
-        <Input
-          type="password"
-          ref={password}
-          placeholder="Password"
-          className="w-fit px-[4vw]"
-        />
-        <Button>SignUp</Button>
+        <UsernameInput ref={username} />
+        <PasswordInput ref={password} />
+        <button
+          className="btn btn-neutral btn-wide text-[1.4rem]"
+          onClick={() => console.log(password.current?.value)}
+        >
+          SignUp
+        </button>
       </form>
     </>
   );

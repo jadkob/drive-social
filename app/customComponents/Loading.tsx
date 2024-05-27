@@ -2,13 +2,8 @@ import { cn } from "@/lib/utils";
 
 export default function Loading({ className }: { className?: String }) {
   return (
-    <h1
-      className={cn(
-        "text-center text-[2rem] mt-[20vh] animate-bounce",
-        className
-      )}
-    >
-      Loading...
-    </h1>
+    <div className="flex items-center justify-center w-screen h-screen">
+      <span className="loading loading-spinner loading-lg"></span>;
+    </div>
   );
 }
