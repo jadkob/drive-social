@@ -13,7 +13,7 @@ export const postSchema = new mongoose.Schema({
   name: String,
   country: String,
   rsvps: [String],
-  Date: String,
+  date: String,
   location: String,
 });
 

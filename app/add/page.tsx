@@ -8,6 +8,7 @@ import Error from "../customComponents/Error";
 import Loading from "../customComponents/Loading";
 import Back from "../customComponents/backButton";
 import Nav from "../Nav";
+import { getCookie } from "cookies-next";
 
 export default function LogIn() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -15,7 +16,7 @@ export default function LogIn() {
   const name = useRef<HTMLInputElement>(null);
   const country = useRef<HTMLInputElement>(null);
   const location = useRef<HTMLInputElement>(null);
-  const date = useRef<HTMLInputElement>(null);
+  const [date, setDate] = useState("");
   const router = useRouter();
   return loading ? (
     <Loading />
@@ -29,12 +30,20 @@ export default function LogIn() {
           setLoading(true);
           setError("");
           axios
-            .post("/api/posts", {
-              name: name.current?.value,
-              country: country.current?.value,
-              location: location.current?.value,
-              date: date.current?.value,
-            })
+            .post(
+              "/api/posts",
+              {
+                name: name.current?.value,
+                country: country.current?.value,
+                location: location.current?.value,
+                date,
+              },
+              {
+                headers: {
+                  Authorization: `Bearer ${getCookie("token")}`,
+                },
+              }
+            )
             .then((res) => {
               alert("Post created successfully");
               router.push("/home");
@@ -59,12 +68,11 @@ export default function LogIn() {
           className="w-fit px-[4vw]"
         />
         <Input
-          ref={date}
           placeholder="Date"
           className="w-fit px-[4vw]"
-          type="date"
+          onChange={(e) => setDate(e.target.value)}
         />
-        <Button>Add</Button>
+        <Button onClick={() => alert(date)}>Add</Button>
       </form>
     </>
   );

@@ -5,7 +5,7 @@ export interface Post {
   country: String;
   location: String;
   rsvps: String[];
-  Date: String;
+  date: String;
 }
 export interface User {
   username: String;

@@ -57,7 +57,7 @@ export default function Home() {
               <h2 className="text-[1.4rem]">
                 This meetup is in {post.country} at {post.location}
               </h2>
-              <h2>This event will take place on {post.Date}</h2>
+              <h2>This event will take place on {post.date}</h2>
               <h2 className="text-[1.2rem]">
                 This Event is hosted by: {post.author}
               </h2>
