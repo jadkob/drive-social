@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 
-export const UsernameInput = forwardRef((props, ref) => {
+const UsernameInput = forwardRef((props, ref) => {
   return (
     <label className="input input-bordered flex items-center gap-2">
       <svg
@@ -20,3 +20,7 @@ export const UsernameInput = forwardRef((props, ref) => {
     </label>
   );
 });
+
+UsernameInput.displayName = "UsernameInput";
+
+export { UsernameInput };

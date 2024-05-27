@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 
-export const PasswordInput = forwardRef((props, ref) => {
+const PasswordInput = forwardRef((props, ref) => {
   return (
     <label className="input input-bordered flex items-center gap-2">
       <svg
@@ -24,3 +24,7 @@ export const PasswordInput = forwardRef((props, ref) => {
     </label>
   );
 });
+
+PasswordInput.displayName = "PasswordInput";
+
+export { PasswordInput };
