@@ -39,6 +39,32 @@ export default function Home() {
     fetchPosts();
   }, []);
 
+  const handleRSVP = async (postId: string) => {
+    try {
+      const res = await axios.post(
+        "/api/posts/rsvp",
+        { postId },
+        {
+          headers: {
+            Authorization: `Bearer ${getCookie("token")}`,
+          },
+        }
+      );
+      alert("RSVPed succesfully");
+      // Update the post in the state with the new data returned from the server
+      setPosts((prevPosts) =>
+        prevPosts.map((post) =>
+          post._id === postId
+            ? { ...post, rsvps: [...post.rsvps, username] }
+            : post
+        )
+      );
+    } catch (err: any) {
+      console.error(err.message);
+      alert(err.response?.data || "An error occurred");
+    }
+  };
+
   return (
     <>
       <Nav />
@@ -51,16 +77,18 @@ export default function Home() {
           posts.map((post) => (
             <div
               key={post._id as string}
-              className="flex flex-col gap-[1vh] border-solid border w-fit h-fit p-[10vw] items-start sm:items-center"
+              className="flex flex-col gap-[1vh] border-solid border p-[6vw]"
             >
-              <h1 className="text-[1.6rem]">Event Name: {post.name}</h1>
-              <h2 className="text-[1.4rem]">
-                This meetup is in {post.country} at {post.location}
-              </h2>
-              <h2>This event will take place on {post.date}</h2>
-              <h2 className="text-[1.2rem]">
-                This Event is hosted by: {post.author}
-              </h2>
+              <h1 className="text-[1.6rem] text-center">{post.name}</h1>
+              <div className="mt-[1vw] flex flex-col gap-[2vh]">
+                <h2 className="text-[1.4rem]">
+                  This meetup is in {post.country} at {post.location}
+                </h2>
+                <h2>This event will take place on {post.date}</h2>
+                <h2 className="text-[1.2rem]">
+                  This Event is hosted by: {post.author}
+                </h2>
+              </div>
             </div>
           ))
         )}
